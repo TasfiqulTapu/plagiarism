@@ -3,13 +3,14 @@ A simple plagiarism detector written in C.
 
 
 ## Progress
-[x] Reading files
-[x] Normalizing text
-[x] Tokenizer
-[x] Stopword remover
-[ ] Word2Vec
-[ ] Cosine Similarity
-[ ] UI
+- [x] Reading files
+- [x] Normalizing text
+- [x] Tokenizer
+- [x] Stopword remover
+- [ ] Word2Vec
+- [ ] Cosine Similarity
+- [ ] UI
+- [ ] :tada:
 
 ## Details
 This project uses [Bag of words](https://en.wikipedia.org/wiki/Content_similarity_detection#Bag_of_words) approach for content similarity detection. 
