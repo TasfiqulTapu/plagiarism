@@ -1,3 +1,6 @@
+/*
+Modified hash table implementation from https://www.youtube.com/watch?v=wg8hZxMRwcw
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
