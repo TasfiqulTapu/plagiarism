@@ -8,6 +8,12 @@
  * @returns Normalized string
  */
 char *normalize(FILE *f);
+/**
+ * @brief Tokenize text into individual words and remove stopwords
+ * @param str An array of normalized characters
+ * @returns StringDeque of tokens(words)
+ */
+StringDeque* tokenize(char *str);
 
 
 #endif
