@@ -22,6 +22,7 @@ Bag of words model: https://en.wikipedia.org/wiki/Bag-of-words_model
 Pros: 
 - Looks beyond just simple text comparison
 - Much more efficient since we can use HashMap/Dictionary 
+
 Cons: 
 - Meaning is lost during compute. 
 - Words can be replaced to circumnavigate
