@@ -9,8 +9,8 @@ Modified hash table implementation from https://www.youtube.com/watch?v=wg8hZxMR
 #define TABLE_SIZE 10000 // Worstcase scenario we have 10k individual words
 
 typedef struct HashNode {
-    char *key;
-    int value;
+    char *key;    
+    double value; // Using double if we need it for tf-idf later
     struct HashNode *next;
 } HashNode;
 
@@ -24,7 +24,7 @@ typedef struct HashTable {
  * @param key key to hash
  * @returns hashed value
  */
-unsigned int hash(char *key){
+unsigned int hash(const char *key){
     long long PRIME = 31;
     unsigned long int value = 0;
     unsigned int key_len = strlen(key);
@@ -76,6 +76,7 @@ void ht_set(HashTable *ht, const char *key, int value){
         strcpy(new_node->key, key);
         new_node->value = value;
         ht->entries[slot] = new_node;
+        ht->size = ht->size + 1;
         return;
     }
 
@@ -102,14 +103,16 @@ void ht_set(HashTable *ht, const char *key, int value){
     strcpy(new_node->key, key);
     new_node->value = value;
     prev->next = new_node;
+    ht->size = ht->size + 1;
+    return;
 }
 
-int ht_get(HashTable *ht, const char *key){
+double ht_get(HashTable *ht, const char *key){
     unsigned int slot = hash(key);
     HashNode *entry = ht->entries[slot];
 
     // Case 1: Empty slot
-    if(entry==NULL) return NULL;
+    if(entry==NULL) return 0.0;
 
     // Case 2: Something exists
     // We walk
@@ -119,9 +122,85 @@ int ht_get(HashTable *ht, const char *key){
         }
         entry = entry->next;
     }
-    return NULL; // If we can't find anything after our walk
+    return 0.0; // If we can't find anything after our walk
 }
 
-char **ht_keys(const HashTable *ht){}
+int ht_size(HashTable* ht){
+    if (ht == NULL) {
+        perror("Hahtable doesn't exist");
+        return 0;
+    }
+    return ht->size;
+}
 
-void free_table(HashTable *ht){}
+/**
+ * @brief Retrieves all keys currently stored in the hash table.
+ * @param ht A pointer to the HashTable.
+ * @returns A dynamically allocated array of strings (char**).
+ */
+char **ht_keys(const HashTable *ht){
+    if (!ht) {
+        fprintf(stderr, "Error: Invalid input to ht_keys function (NULL HashTable).\n");
+        return NULL;
+    }
+
+    if (ht->size == 0) {
+        // If the hash table is empty, return NULL
+        return NULL;
+    }
+
+    // Allocate memory for the array of key strings
+    char** key_list = (char**)malloc(ht->size * sizeof(char*));
+    if (!key_list) {
+        perror("Error allocating memory for key list");
+        return NULL;
+    }
+
+    int key_count = 0;
+    for (int i = 0; i < TABLE_SIZE; i++) { // Use TABLE_SIZE as capacity is fixed
+        // Traverse the linked list in the current bucket
+        HashNode* current = ht->entries[i];
+        while (current) {
+            // Duplicate the key string and add it to the key_list
+            key_list[key_count] = strdup(current->key);
+            if (!key_list[key_count]) {
+                 perror("Error duplicating key string for key list");
+                 // Clean up already duplicated keys if allocation fails
+                 for(int j = 0; j < key_count; j++) {
+                     free(key_list[j]);
+                 }
+                 free(key_list);
+                 return NULL;
+            }
+            key_count++;
+            current = current->next;
+        }
+    }
+
+    return key_list;
+}
+
+/**
+ * @brief Frees all dynamically allocated memory associated with the hash table.
+ * @param ht A pointer to the HashTable to be freed.
+ */
+void ht_free(HashTable *ht){
+    if (!ht) {
+        return; // Nothing to free if the table pointer is NULL
+    }
+
+    // Iterate through each node
+    for (int i = 0; i < TABLE_SIZE; i++) { // Use TABLE_SIZE as capacity is fixed
+        HashNode* current = ht->entries[i];
+        // free each node
+        while (current) {
+            HashNode* temp = current;
+            current = current->next;
+            free(temp->key);   // Free the duplicated key string
+            free(temp);        // Free the node structure itself
+        }
+    }
+
+    free(ht->entries); // Free the array of buckets (entries)
+    free(ht);          // Free the hash table structure itself
+}
