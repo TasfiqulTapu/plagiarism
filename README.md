@@ -7,8 +7,9 @@ A simple plagiarism detector written in C.
 - [x] Normalizing text
 - [x] Tokenizer
 - [x] Stopword remover
-- [ ] Word2Vec
-- [ ] Cosine Similarity
+- [x] Word2Vec
+- [x] Cosine Similarity
+- [ ] Common words
 - [ ] UI
 - [ ] :tada:
 
