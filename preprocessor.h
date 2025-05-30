@@ -1,3 +1,5 @@
+#ifndef NOKOL_H
+#define NOKOL_H
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -154,3 +156,7 @@ StringDeque* tokenize(char *str){
     }
     return tokens;
 }
+
+
+
+#endif

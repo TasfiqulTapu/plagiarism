@@ -2,8 +2,10 @@
 #include "stdlib.h"
 #include "deque.h"
 #include "hashmap.h"
-#include "plagiarism.h"
+#include "preprocessor.h"
+#include "detection.h"
 #include "argparse.h"
+
 
 int main(int argc, char **argv){
 
@@ -48,9 +50,9 @@ int main(int argc, char **argv){
 
     double similarity = cosine_similarity(vec1, vec2);
     ht_free(vec1); ht_free(vec2);
-    printf("\rCosine Similarity between the two documents: ");
+    printf("\rCosine Similarity between the two documents: \033[;33m");
     printf("%lf", similarity);
-    printf("\n");
+    printf("\033[;0m\n");
 
 
     return 0;

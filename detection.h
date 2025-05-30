@@ -1,3 +1,5 @@
+#ifndef DETECTION_H
+#define DETECTION_H
 #include "hashmap.h"
 #include "deque.h"
 #include "stdio.h"
@@ -56,3 +58,5 @@ double cosine_similarity(HashTable *vec1, HashTable *vec2){
     double v2 = vec_abs(vec2);
     return dot / v1 / v2;
 }
+
+#endif

@@ -2,7 +2,7 @@
 TARGET = main
 
 # Define the source files
-SRCS = main.c deque.c hashmap.c argparse.c preprocessor.c detection.c 
+SRCS = main.c 
 
 # Default target: builds the executable
 all: $(TARGET)
