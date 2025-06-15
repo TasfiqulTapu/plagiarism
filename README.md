@@ -3,7 +3,7 @@
 A straightforward plagiarism detector written in C, designed to identify content similarity efficiently. This tool uses text analysis to detect plagiarism.
 
 <p align="center">
-  <img src="https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true" alt="Plagiarism detector running"/>
+  !["Plagiarism detector running"](https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true)
 </p>
 
 ## How It Works
