@@ -1,4 +1,5 @@
+
 tests/
 pytest/
-main
 temp/
+main.out

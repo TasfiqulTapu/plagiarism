@@ -1,5 +1,5 @@
 # Define the target executable
-TARGET = main
+TARGET = main.out
 
 # Define the source files
 SRCS = main.c 
