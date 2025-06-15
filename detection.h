@@ -6,14 +6,17 @@
 #include "stdlib.h"
 #include "math.h"
 
-HashTable *vectorize(StringDeque *tokens){
+HashTable *vectorize(StringDeque *tokens)
+{
     HashTable *vec = create_hashtable();
-    if (tokens == NULL) {
+    if (tokens == NULL)
+    {
         perror("Failed to init Hashtable");
         return NULL;
     }
 
-    while(sdq_size(tokens) != 0){
+    while (sdq_size(tokens) != 0)
+    {
         char *str = sdq_shift(tokens);
         double count = ht_get(vec, str);
         count += 1.0;
@@ -24,21 +27,25 @@ HashTable *vectorize(StringDeque *tokens){
     return vec;
 }
 
-double vec_abs(HashTable *ht){
+double vec_abs(HashTable *ht)
+{
     char **keys = ht_keys(ht);
     int len = ht_size(ht);
     double sqr_sum = 0.0;
-    for(int i=0; i<len; i++){
-        sqr_sum += pow(ht_get(ht, keys[i]),2);
+    for (int i = 0; i < len; i++)
+    {
+        sqr_sum += pow(ht_get(ht, keys[i]), 2);
     }
     double abs = sqrt(sqr_sum);
     return abs;
 }
-double vec_dot(HashTable *vec1, HashTable *vec2){
+double vec_dot(HashTable *vec1, HashTable *vec2)
+{
     char **keys = ht_keys(vec1);
     int len = ht_size(vec1);
     double dot_prod = 0.0;
-    for(int i=0; i<len; i++){
+    for (int i = 0; i < len; i++)
+    {
         dot_prod += ht_get(vec1, keys[i]) * ht_get(vec2, keys[i]);
     }
     return dot_prod;
@@ -52,11 +59,32 @@ double vec_dot(HashTable *vec1, HashTable *vec2){
  * 0 == low similarity
  * 1 == high similarity
  */
-double cosine_similarity(HashTable *vec1, HashTable *vec2){
+double cosine_similarity(HashTable *vec1, HashTable *vec2)
+{
     double dot = vec_dot(vec1, vec2);
     double v1 = vec_abs(vec1);
     double v2 = vec_abs(vec2);
     return dot / v1 / v2;
+}
+
+StringDeque *common_words(HashTable *vec1, HashTable *vec2)
+{
+    StringDeque *common = create_str_deque();
+    if (common == NULL)
+    {
+        perror("Failed to init Tokenizer deque");
+        return NULL;
+    }
+
+    char **keys = ht_keys(vec1);
+    int len = ht_size(vec1);
+    for (int i = 0; i < len; i++)
+    {
+        if(ht_get(vec1, keys[i]) * ht_get(vec2, keys[i]) > 1){
+            sdq_push(common, keys[i]);
+        }
+    }
+    return common;
 }
 
 #endif
