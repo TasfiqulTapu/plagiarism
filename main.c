@@ -9,7 +9,7 @@
 
 // SET 0 when you need only probability
 // without excess logging
-#define LOGGING 0
+#define LOGGING 1
 
 int main(int argc, char **argv)
 {

@@ -9,8 +9,8 @@ void greet(int q)
     printf("\n\033[;36m(\033[4m     \\/\033[24m");
     printf("    \033[33mPlagiarism checker\033[36m\n");
     printf("(\033[4m     ``o\033[24m");
-    printf("   \033[33mv0-alpha\033[36m\n");
-    printf(" \033[4m// \033[24m \033[4m // \033[24m\033[;0m\n");
+    printf("   \033[33mv1\033[36m\n");
+    printf(" \033[4m// \033[24m \033[4m // \033[24m\033[;0m\n\n");
 }
 
 void file_name_not_found(int q)
@@ -40,12 +40,12 @@ void show_filenames(char *s1, char *s2, int q){
 
 
 void likely_plagiarised(double sim){
-    printf("\033[31mThe file is likey plagiarised.\033[0m\n");
+    printf("\n\033[31mThe file is likey plagiarised.\033[0m\n");
     printf("Similarity: \033[33m%lf\033[0m\n",sim);
 }
 
 void likely_original(double sim){
-    printf("\033[32mThe file is likey original.\033[0m\n");
+    printf("\n\033[32mThe file is likey original.\033[0m\n");
     printf("Similarity: \033[33m%lf\033[0m\n",sim);
 }
 
@@ -59,7 +59,7 @@ void print_common(StringDeque *c,HashTable *vec1, HashTable *vec2, int q){
         printf("%s, ",  str);
         free(str);
     }
-    printf("\b\b\n");
+    printf("\b\b\n\n");
     sdq_destroy(c);
 }
 void print_table_header(char* p, char*q, char*r)
