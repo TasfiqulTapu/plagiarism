@@ -2,9 +2,7 @@
 
 A straightforward plagiarism detector written in C, designed to identify content similarity efficiently. This tool uses text analysis to detect plagiarism.
 
-<p align="center">
-  ![Plagiarism detector running](https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true)
-</p>
+![Plagiarism detector running](https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true)
 
 ## How It Works
 This project uses a Bag of Words (BoW) approach for [content similarity detection](https://en.wikipedia.org/wiki/Content_similarity_detection#Bag_of_words) .
