@@ -3,7 +3,7 @@
 A straightforward plagiarism detector written in C, designed to identify content similarity efficiently. This tool uses text analysis to detect plagiarism.
 
 <p align="center">
-  !["Plagiarism detector running"](https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true)
+  ![Plagiarism detector running](https://github.com/TasfiqulTapu/plagiarism/blob/master/builds/run.png?raw=true)
 </p>
 
 ## How It Works
@@ -13,20 +13,19 @@ This project uses a Bag of Words (BoW) approach for [content similarity detectio
 The core idea is to treat each document as a "bag" of words, ignoring word order and grammar. The focus is on the frequency of words. For plagiarism detection, the [BoW model](https://en.wikipedia.org/wiki/Bag-of-words_model) helps identify common vocabulary between two documents.
 
 ### Processing Steps
-
 The detector processes text through these stages:
 
-    Reading Files: The program reads the content of the text files provided for comparison.
+Reading Files: The program reads the content of the text files provided for comparison.
 
-    Normalizing Text: Text is cleaned by converting all characters to lowercase and removing punctuation. This ensures words like "Word" and "word." are treated as the same.
+Normalizing Text: Text is cleaned by converting all characters to lowercase and removing punctuation. This ensures words like "Word" and "word." are treated as the same.
 
-    Tokenizer: The cleaned text is broken down into individual words, or "tokens."
+Tokenizer: The cleaned text is broken down into individual words, or "tokens."
 
-    Stopword Remover: Common words like "the," "is," and "and" (stopwords) are removed because they don't significantly contribute to content meaning.
+Stopword Remover: Common words like "the," "is," and "and" (stopwords) are removed because they don't significantly contribute to content meaning.
 
-    Cosine Similarity: Once words are vectorized, cosine similarity measures the angle between two vectors. A value closer to 1 means higher similarity, while a value closer to 0 indicates less similarity. This metric quantifies the degree of plagiarism.
+Cosine Similarity: Once words are vectorized, cosine similarity measures the angle between two vectors. A value closer to 1 means higher similarity, while a value closer to 0 indicates less similarity. This metric quantifies the degree of plagiarism.
 
-    Final detection: If cosine similarity exceeds a certain threshold, content is marked as plagiarised.
+Final detection: If cosine similarity exceeds a certain threshold, content is marked as plagiarised.
 
 ### Pros & Cons
 Every tool has its advantages and limitations.
